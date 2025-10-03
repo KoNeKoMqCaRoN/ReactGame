@@ -22,7 +22,7 @@ struct ContentView: View {
               .scaledToFit()
               .padding(.init(top: 10, leading: 0, bottom: 50, trailing: 0))
            
-           // Startボタンaaa
+           // Startボタン
            Button {
               soundPlayer.playTapSound()
               isShowingPlayingView = true // View移動をtrue
