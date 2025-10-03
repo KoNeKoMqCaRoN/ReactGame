@@ -12,9 +12,12 @@ struct RankingView: View {
    let results: [Result] = getResults()
    
     var body: some View {
-       ForEach(results, id: \.id) { result in
-          Text(result.name)
-       }
+        List {
+            ForEach(results, id: \.id) { result in
+                Text("\(result.name): \(result.reactTime)秒")
+                    .font(.title)
+            }
+        }
     }
 }
 

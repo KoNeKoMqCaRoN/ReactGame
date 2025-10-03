@@ -26,15 +26,6 @@ struct ContentView: View {
            Button {
               soundPlayer.playTapSound()
               isShowingPlayingView = true // View移動をtrue
-              setResult(name: "masuda", reactTime: 0.245)
-              setResult(name: "saitou", reactTime: 0.131)
-              setResult(name: "hara", reactTime: 0.156)
-              setResult(name: "hou", reactTime: 0.189)
-              setResult(name: "ogawa", reactTime: 0.445)
-              showResult()
-              print("========================")
-              sortResults()
-              showResult()
            } label: {
               VStack {
                  Image(systemName: "play.fill")
@@ -59,6 +50,15 @@ struct ContentView: View {
            Button {
               soundPlayer.rankingTapSound()
               isShowingRankingView = true
+               setResult(name: "masuda", reactTime: 0.245)
+               setResult(name: "saitou", reactTime: 0.131)
+               setResult(name: "hara", reactTime: 0.156)
+               setResult(name: "hou", reactTime: 0.189)
+               setResult(name: "ogawa", reactTime: 0.445)
+               showResult()
+               print("========================")
+               sortResults()
+               showResult()
            } label: {
               VStack {
                  Image(systemName: "flag.fill")
