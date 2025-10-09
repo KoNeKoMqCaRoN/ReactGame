@@ -16,74 +16,83 @@ struct ContentView: View {
    
    
     var body: some View {
-        VStack {
-           Image(.gameTitle) // ゲームタイトル画像
-              .resizable()
-              .scaledToFit()
-              .padding(.init(top: 10, leading: 0, bottom: 50, trailing: 0))
-           
-           // Startボタン
-           Button {
-              soundPlayer.playTapSound()
-              isShowingPlayingView = true // View移動をtrue
-           } label: {
-              VStack {
-                 Image(systemName: "play.fill")
+        ZStack {
+            Image("home")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            VStack {
+                Image(.gameTitle) // ゲームタイトル画像
                     .resizable()
-                    .frame(width: 50, height: 50)
                     .scaledToFit()
-                 Text("Start")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.black)
-              }
-              .frame(maxWidth: .infinity, maxHeight: 170)
-              .background(Color.gray.opacity(0.25))
-              .cornerRadius(20)
-           }
-           .fullScreenCover(isPresented: $isShowingPlayingView) {
-              PlayingView()
-           }
-           .padding(.horizontal, 80) // Startボタンend
-           
-           // Rankingボタン
-           Button {
-              soundPlayer.rankingTapSound()
-              isShowingRankingView = true
-               setResult(name: "masuda", reactTime: 0.245)
-               setResult(name: "saitou", reactTime: 0.131)
-               setResult(name: "hara", reactTime: 0.156)
-               setResult(name: "hou", reactTime: 0.189)
-               setResult(name: "ogawa", reactTime: 0.445)
-               showResult()
-               print("========================")
-               sortResults()
-               showResult()
-           } label: {
-              VStack {
-                 Image(systemName: "flag.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .scaledToFit()
-                 Text("Ranking")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.black)
-              }
-              .frame(maxWidth: .infinity, maxHeight: 170)
-              .background(Color.gray.opacity(0.25))
-              .cornerRadius(20)
-           }
-           .fullScreenCover(isPresented: $isShowingRankingView) {
-              RankingView()
-           }
-           .padding(.top, 40)
-           .padding(.horizontal, 80)
-
-           Spacer()
-           
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.init(top: 0, leading: 20, bottom: 0, trailing:40))
+                
+                // Startボタン
+                Button {
+                    soundPlayer.playTapSound()
+                    isShowingPlayingView = true // View移動をtrue
+                } label: {
+                    VStack {
+                        Image(systemName: "play.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .scaledToFit()
+                        Text("Start")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.black)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.white.opacity(1))
+                    .cornerRadius(20)
+                }
+                .fullScreenCover(isPresented: $isShowingPlayingView) {
+                    NavigationStack {
+                        PlayingView()
+                    }
+                }
+                .padding(.horizontal, 250) // Startボタンend
+                
+                // Rankingボタン
+                Button {
+                    soundPlayer.rankingTapSound()
+                    isShowingRankingView = true
+                    setResult(name: "masuda", reactTime: 0.245)
+                    setResult(name: "saitou", reactTime: 0.131)
+                    setResult(name: "hara", reactTime: 0.156)
+                    setResult(name: "hou", reactTime: 0.189)
+                    setResult(name: "ogawa", reactTime: 0.445)
+                    showResult()
+                    print("========================")
+                    sortResults()
+                    showResult()
+                } label: {
+                    VStack {
+                        Image(systemName: "flag.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .scaledToFit()
+                        Text("Ranking")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.black)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 170)
+                    .background(Color.gray.opacity(0.25))
+                    .cornerRadius(20)
+                }
+                .fullScreenCover(isPresented: $isShowingRankingView) {
+                    RankingView()
+                }
+                .padding(.top, 40)
+                .padding(.horizontal, 80)
+                
+                Spacer()
+                
+            }
         }
-        .padding()
+//        .padding()
     }
 }
 
