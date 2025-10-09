@@ -30,7 +30,7 @@ struct ContentView: View {
                 
                 // Startボタン
                 Button {
-                    soundPlayer.playTapSound()
+                    soundPlayer.playTapSound()//
                     isShowingPlayingView = true // View移動をtrue
                 } label: {
                     VStack {
