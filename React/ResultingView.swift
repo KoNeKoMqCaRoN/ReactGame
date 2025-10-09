@@ -9,13 +9,41 @@ import SwiftUI
 
 struct ResultingView: View {
     
-    @State private var reactionTime: Double?  // 成功時の反応時間
+    let reactionTime: Double? // 成功時の反応時間
+    let isFail: Bool          //フライング判定
+    let onRetry: () -> Void
+    
+    @Environment(\.dismiss) private var dismiss //ひとつ前に戻る
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            if isFail {
+                Text("フライング！")
+            } else if let time = reactionTime {
+                Text(String(format: "%.7f秒", time))
+            }
+            
+            Button{
+                
+                
+                
+            } label: {
+                Text("ランキングに載せる！")
+            }
+            
+            Button{
+                onRetry()
+            } label: {
+                Text("もう一回")
+            }
+            
+            Button{
+                dismiss()
+                dismiss()
+            } label: {
+                Text("ホームに戻る")
+            }
+            
+        }
     }
-}
-
-#Preview {
-    ResultingView()
 }

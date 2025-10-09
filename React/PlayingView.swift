@@ -1,42 +1,43 @@
-//
-//  PlayingView.swift
-//  React
-//
-//  Created by cmStudent on 2025/10/01.
-//
-
 import SwiftUI
 
 struct PlayingView: View {
     @State private var isShining = false        // 光ったかどうか
-    @State private var startTime: Date?       // 光り始めた時刻
-    @State private var reactionTime: Double?  // 成功時の反応時間
-    @State private var isFail = false         // フライング判定
-    @State private var showResult = false     // 結果画面表示
-    //let watingImage = Image(.wating)
+    @State private var startTime: Date?         // 光り始めた時刻
+    @State private var reactionTime: Double?    // 成功時の反応時間
+    @State private var isFail = false           // フライング判定
+    @State private var showResult = false       // 結果画面表示
 
     var body: some View {
         ZStack {
-            (isShining ? Image(.shining) : Image(.wating))
-                .ignoresSafeArea()
-            
-            Text(isShining ? "今だ！！" : "集中…")
-                .font(.largeTitle)
-                .foregroundColor(.white)
+            if showResult {
+                // 結果画面をそのまま重ねて表示
+                ResultingView(
+                    reactionTime: reactionTime,
+                    isFail: isFail,
+                    onRetry: resetGame
+                )
+                .transition(.opacity) // フェード切り替え
+            } else {
+                // 通常のプレイ画面
+                ZStack {
+                    (isShining ? Image(.shining) : Image(.wating))
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                    
+                    Text(isShining ? "今だ！！" : "集中…")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                }
+                .transition(.opacity)
+                .onAppear { startWaiting() }
+                .onTapGesture { handleTap() }
+            }
         }
-        .onAppear {
-            startWaiting()
-        }
-        .onTapGesture {
-            handleTap()
-        }
-        .navigationDestination(isPresented: $showResult) {
-            ResultingView()
-        }
-        
+        .animation(.easeInOut(duration: 0.2), value: showResult) // スムーズな切替
     }
 
-    // 5〜7秒ランダム待ってから光る
+    // ランダムで光る
     func startWaiting() {
         isShining = false
         reactionTime = nil
@@ -50,27 +51,28 @@ struct PlayingView: View {
         }
     }
 
-    // タップされた時の処理
+    // タップ処理
     func handleTap() {
         if isShining, let start = startTime {
-            // 成功
             reactionTime = Date().timeIntervalSince(start)
             isFail = false
         } else {
-            // 失敗（フライング）
             reactionTime = nil
             isFail = true
         }
-        showResult = true
+        withAnimation {
+            showResult = true
+        }
     }
 
     // リセット
     func resetGame() {
-        startWaiting()
+        withAnimation {
+            startWaiting()
+        }
     }
 }
 
 #Preview {
     PlayingView()
 }
-
