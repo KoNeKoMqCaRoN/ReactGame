@@ -63,7 +63,7 @@ struct PlayingView: View {
             reactionTime = nil
             isFail = true
             
-            sp.SoundFail()
+            sp.soundFail()
         }
         withAnimation {
             showResult = true
