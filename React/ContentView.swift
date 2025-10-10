@@ -14,24 +14,6 @@ struct ContentView: View {
    
    let soundPlayer = SoundPlayer() // 音源データ
    
-   var body: some View {
-      ZStack {
-         Image("home")
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-         VStack {
-            Image(.gameTitle) // ゲームタイトル画像
-               .resizable()
-               .scaledToFit()
-               .frame(maxWidth: .infinity, maxHeight: .infinity)
-               .padding(.init(top: 0, leading: 20, bottom: 0, trailing:40))
-            buttons
-         }
-      }
-      //        .padding()
-      
-   }
    
     var body: some View {
         ZStack {
@@ -47,7 +29,6 @@ struct ContentView: View {
             isShowingPlayingView = true // View移動をtrue
          } label: {
             VStack {
-<<<<<<< HEAD
                 Image(.gameTitle) // ゲームタイトル画像
                     .resizable()
                     .scaledToFit()
