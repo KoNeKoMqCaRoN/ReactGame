@@ -30,7 +30,7 @@ struct ContentView: View {
                 
                 // Startボタン
                 Button {
-                    soundPlayer.playTapSound()//
+                    soundPlayer.playTapSound()
                     isShowingPlayingView = true // View移動をtrue
                 } label: {
                     VStack {
@@ -50,6 +50,7 @@ struct ContentView: View {
                 .fullScreenCover(isPresented: $isShowingPlayingView) {
                     NavigationStack {
                         PlayingView()
+                            .transition(.opacity)
                     }
                 }
                 .padding(.horizontal, 250) // Startボタンend
