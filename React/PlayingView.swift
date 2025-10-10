@@ -23,7 +23,7 @@ struct PlayingView: View {
             } else {
                 // 通常のプレイ画面
                 ZStack {
-                    (isShining ? Image(.shining) : Image(.wating))
+                    (isShining ? Image(.shining) : Image(.waiting))
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
@@ -49,6 +49,7 @@ struct PlayingView: View {
 
         let delay = Double.random(in: 5...7)
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            sp.soundThunder()
             isShining = true
             startTime = Date()
         }

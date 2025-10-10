@@ -35,7 +35,7 @@ struct ContentView: View {
         VStack {
             // Startボタン
             Button {
-                soundPlayer.SoundTapPlay()
+                soundPlayer.soundTapPlay()
                 isShowingPlayingView = true // View移動をtrue
             } label: {
                 VStack {
@@ -58,7 +58,7 @@ struct ContentView: View {
             .padding(.horizontal, 80) // Startボタンend
             // Rankingボタン
             Button {
-                soundPlayer.SoundTapRanking()
+                soundPlayer.soundTapRanking()
                 isShowingRankingView = true
                 setResult(name: "masuda", reactTime: 0.245)
                 setResult(name: "saitou", reactTime: 0.131)
