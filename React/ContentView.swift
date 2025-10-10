@@ -24,9 +24,10 @@ struct ContentView: View {
             Image(.gameTitle) // ゲームタイトル画像
                .resizable()
                .scaledToFit()
-               .frame(maxWidth: .infinity, maxHeight: .infinity)
-               .padding(.init(top: 0, leading: 20, bottom: 0, trailing:40))
+               .frame(maxWidth: .infinity, maxHeight: 200)
+               .padding(.init(top: 0, leading: 20, bottom: 80, trailing:40))
             buttons
+            Spacer()
          }
       }
       //        .padding()
@@ -37,7 +38,7 @@ struct ContentView: View {
       VStack {
          // Startボタン
          Button {
-            soundPlayer.SoundTapPlay()
+            soundPlayer.soundTapPlay()
             isShowingPlayingView = true // View移動をtrue
          } label: {
             VStack {
@@ -61,7 +62,7 @@ struct ContentView: View {
          
          // Rankingボタン
          Button {
-            soundPlayer.SoundTapRanking()
+            soundPlayer.soundTapRanking()
             isShowingRankingView = true
             setResult(name: "masuda", reactTime: 0.245)
             setResult(name: "saitou", reactTime: 0.131)

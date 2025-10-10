@@ -6,7 +6,10 @@ struct PlayingView: View {
     @State private var reactionTime: Double?    // 成功時の反応時間
     @State private var isFail = false           // フライング判定
     @State private var showResult = false       // 結果画面表示
-
+    @State private var workFailSoundItem : DispatchWorkItem? 
+   
+   let sp = SoundPlayer()
+   
     var body: some View {
         ZStack {
             if showResult {
@@ -43,9 +46,11 @@ struct PlayingView: View {
         reactionTime = nil
         isFail = false
         showResult = false
+        
 
         let delay = Double.random(in: 5...7)
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+           sp.soundThunder()
             isShining = true
             startTime = Date()
         }

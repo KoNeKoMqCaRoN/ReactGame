@@ -15,12 +15,14 @@ class SoundPlayer: NSObject {
    let BtnRanking = NSDataAsset(name: "tapRanking")!.data
    let fail = NSDataAsset(name: "tapFail")!.data
    let thunder = NSDataAsset(name: "dropThunder")!.data
+   let waitingThunder = NSDataAsset(name: "waitingThunder")!.data
    
    // 音源プレイヤーの変数
    var BtnPlayPlayer: AVAudioPlayer!
    var BtnRankingPlayer: AVAudioPlayer!
    var failPlayer: AVAudioPlayer!
    var thunderPlayer: AVAudioPlayer!
+   var waitingThunderPlayer: AVAudioPlayer!
    
    // 音源呼び出しメソッド
    func soundTapPlay() {
@@ -52,7 +54,15 @@ class SoundPlayer: NSObject {
          thunderPlayer = try AVAudioPlayer(data: thunder)
          thunderPlayer.play()
       } catch {
-         
+         print("Thunder音でエラー")
+      }
+   }
+   func soundWaitingThunder() {
+      do {
+         waitingThunderPlayer = try AVAudioPlayer(data: waitingThunder)
+         waitingThunderPlayer.play()
+      } catch {
+         print("WaitingThunder音でエラー")
       }
    }
    
