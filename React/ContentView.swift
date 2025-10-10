@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+<<<<<<< HEAD
    
    @State var isShowingPlayingView = false // ゲーム画面が表示されているか
    @State var isShowingRankingView = false // ランキング画面が表示されているか
@@ -41,16 +42,29 @@ struct ContentView: View {
             soundPlayer.soundTapPlay()
             isShowingPlayingView = true // View移動をtrue
          } label: {
+=======
+    
+    @State var isShowingPlayingView = false // ゲーム画面が表示されているか
+    @State var isShowingRankingView = false //ランキング画面が表示されているか
+    
+    let soundPlayer = SoundPlayer() // 音源データ
+    
+    var body: some View {
+        ZStack {
+            Image("home")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+>>>>>>> 11763d22fde39614450fe5e0bb4e0da292166ee5
             VStack {
-               Image(systemName: "play.fill")
-                  .resizable()
-                  .frame(width: 50, height: 50)
-                  .scaledToFit()
-               Text("Start")
-                  .font(.largeTitle)
-                  .fontWeight(.bold)
-                  .foregroundStyle(.black)
+                Image(.gameTitle) // ゲームタイトル画像
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.init(top: 0, leading: 20, bottom: 0, trailing:40))
+                buttons
             }
+<<<<<<< HEAD
             .frame(maxWidth: .infinity, minHeight: 170)
             .background(Color.white.opacity(0.75))
             .cornerRadius(20)
@@ -83,22 +97,73 @@ struct ContentView: View {
                   .font(.largeTitle)
                   .fontWeight(.bold)
                   .foregroundStyle(.black)
+=======
+        }
+        //        .padding()
+    }
+    var buttons: some View {
+        VStack {
+            // Startボタン
+            Button {
+                soundPlayer.soundTapPlay()
+                isShowingPlayingView = true // View移動をtrue
+            } label: {
+                VStack {
+                    Image(systemName: "play.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .scaledToFit()
+                    Text("Start")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.black)
+                }
+                .frame(maxWidth: .infinity, minHeight: 170)
+                .background(Color.white.opacity(0.75))
+                .cornerRadius(20)
+>>>>>>> 11763d22fde39614450fe5e0bb4e0da292166ee5
             }
-            .frame(maxWidth: .infinity, maxHeight: 170)
-            .background(Color.white.opacity(0.75))
-            .cornerRadius(20)
-         }
-         .fullScreenCover(isPresented: $isShowingRankingView) {
-            RankingView()
-         }
-         .padding(.top, 50)
-         .padding(.horizontal, 80)
-      }
-   }
+            .fullScreenCover(isPresented: $isShowingPlayingView) {
+                PlayingView()
+            }
+            .padding(.horizontal, 80) // Startボタンend
+            // Rankingボタン
+            Button {
+                soundPlayer.soundTapRanking()
+                isShowingRankingView = true
+                setResult(name: "masuda", reactTime: 0.245)
+                setResult(name: "saitou", reactTime: 0.131)
+                setResult(name: "hara", reactTime: 0.156)
+                setResult(name: "hou", reactTime: 0.189)
+                setResult(name: "ogawa", reactTime: 0.445)
+                showResult()
+                print("========================")
+                sortResults()
+                showResult()
+            } label: {
+                VStack {
+                    Image(systemName: "flag.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .scaledToFit()
+                    Text("Ranking")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.black)
+                }
+                .frame(maxWidth: .infinity, maxHeight: 170)
+                .background(Color.white.opacity(0.75))
+                .cornerRadius(20)
+            }
+            .fullScreenCover(isPresented: $isShowingRankingView) {
+                RankingView()
+            }
+            .padding(.top, 50)
+            .padding(.horizontal, 80)
+        }
+    }
 }
 
 #Preview {
-   ContentView()
+    ContentView()
 }
-
-// ganbaru

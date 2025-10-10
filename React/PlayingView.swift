@@ -6,10 +6,17 @@ struct PlayingView: View {
     @State private var reactionTime: Double?    // 成功時の反応時間
     @State private var isFail = false           // フライング判定
     @State private var showResult = false       // 結果画面表示
+<<<<<<< HEAD
     @State private var workFailSoundItem : DispatchWorkItem? 
    
    let sp = SoundPlayer()
    
+=======
+    @State private var workFailSoundWork : DispatchWorkItem?
+    
+    let sp = SoundPlayer()
+
+>>>>>>> 11763d22fde39614450fe5e0bb4e0da292166ee5
     var body: some View {
         ZStack {
             if showResult {
@@ -23,7 +30,7 @@ struct PlayingView: View {
             } else {
                 // 通常のプレイ画面
                 ZStack {
-                    (isShining ? Image(.shining) : Image(.wating))
+                    (isShining ? Image(.shining) : Image(.waiting))
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
@@ -50,7 +57,11 @@ struct PlayingView: View {
 
         let delay = Double.random(in: 5...7)
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+<<<<<<< HEAD
            sp.soundThunder()
+=======
+            sp.soundThunder()
+>>>>>>> 11763d22fde39614450fe5e0bb4e0da292166ee5
             isShining = true
             startTime = Date()
         }
@@ -64,6 +75,8 @@ struct PlayingView: View {
         } else {
             reactionTime = nil
             isFail = true
+            
+            sp.soundFail()
         }
         withAnimation {
             showResult = true
