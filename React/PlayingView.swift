@@ -6,6 +6,9 @@ struct PlayingView: View {
     @State private var reactionTime: Double?    // 成功時の反応時間
     @State private var isFail = false           // フライング判定
     @State private var showResult = false       // 結果画面表示
+    @State private var workFailSoundWork : DispatchWorkItem?
+    
+    let sp = SoundPlayer()
 
     var body: some View {
         ZStack {
@@ -59,6 +62,8 @@ struct PlayingView: View {
         } else {
             reactionTime = nil
             isFail = true
+            
+            sp.SoundFail()
         }
         withAnimation {
             showResult = true
