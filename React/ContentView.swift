@@ -12,6 +12,9 @@ struct ContentView: View {
    @State var isShowingPlayingView = false // ゲーム画面が表示されているか
    @State var isShowingRankingView = false // ランキング画面が表示されているか
    
+   let scwidth = UIScreen.main.bounds.width // 画面サイズ横幅取得
+   let scheight = UIScreen.main.bounds.height // 画面サイズ高さ取得
+   
    let soundPlayer = SoundPlayer() // 音源データ
    
    var body: some View {
@@ -24,7 +27,6 @@ struct ContentView: View {
             Image(.gameTitle) // ゲームタイトル画像
                .resizable()
                .scaledToFit()
-//               .frame(maxWidth: .infinity, maxHeight: 200)
                .padding(.init(top: 0, leading: 20, bottom: 80, trailing:40))
             buttons
             Spacer()
@@ -33,6 +35,7 @@ struct ContentView: View {
       }
       
    }
+   
    var buttons: some View {
       VStack {
          // Startボタン
@@ -43,14 +46,14 @@ struct ContentView: View {
             VStack {
                Image(systemName: "play.fill")
                   .resizable()
-                  .frame(width: 50, height: 50)
                   .scaledToFit()
+                  .frame(width: scwidth * 0.125)
                Text("Start")
                   .font(.largeTitle)
                   .fontWeight(.bold)
                   .foregroundStyle(.black)
             }
-            .frame(maxWidth: .infinity, minHeight: 170)
+            .frame(maxWidth: .infinity, minHeight: scheight * 0.2)
             .background(Color.white.opacity(0.75))
             .cornerRadius(20)
          }
@@ -75,14 +78,15 @@ struct ContentView: View {
             VStack {
                Image(systemName: "flag.fill")
                   .resizable()
-                  .frame(width: 50, height: 50)
                   .scaledToFit()
+                  .frame(width: scwidth * 0.125)
                Text("Ranking")
                   .font(.largeTitle)
                   .fontWeight(.bold)
                   .foregroundStyle(.black)
             }
-            .frame(maxWidth: .infinity, minHeight: 170)
+            .scaledToFit()
+            .frame(maxWidth: .infinity, minHeight: scheight * 0.2)
             .background(Color.white.opacity(0.75))
             .cornerRadius(20)
          }
@@ -90,7 +94,7 @@ struct ContentView: View {
             RankingView()
          }
          .padding(.top, 50)
-         .padding(.horizontal, 80)
+         .padding(.horizontal, 80) // Ranking Button end.
       }
    }
 }
