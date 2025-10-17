@@ -13,42 +13,47 @@ struct ResultingView: View {
     let isFail: Bool          //フライング判定
     let onRetry: () -> Void
     
+    let scwidth = UIScreen.main.bounds.width
+    let scheight = UIScreen.main.bounds.height
+    
     @Environment(\.dismiss) private var dismiss //ひとつ前に戻る
     
     var body: some View {
-        VStack{
-            if isFail {
-                Text("押すの早すぎ！")
-                
-                
-            } else if let time = reactionTime {
-                Text(String(format: "%.7f秒", time))
-                
-                Button{
+        
+        ZStack{
+            Image("home")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            VStack{
+                Text("リザルト")
+                    .font(.system(size: 50))
+
                     
+                
+                if isFail {
+                    Text("押すの早すぎ！")
+                        //.padding(.top, 80)
                     
+                } else if let time = reactionTime {
+                    Text(String(format: "%.7f秒", time))
+                        .padding(.top, 80)
                     
-                } label: {
-                    Text("ランキングに載せる！")
+                    Button{
+                        
+                        
+                        
+                    } label: {
+                        Text("ランキングに載せる！")
+                    }
                 }
-                
+                Spacer()
             }
-            
-            
-            
-            Button{
-                onRetry()
-            } label: {
-                Text("もう一回")
-            }
-            
-            Button{
-                dismiss()
-                dismiss()
-            } label: {
-                Text("ホームに戻る")
-            }
-            
+            .frame(maxWidth: scwidth * 0.8, maxHeight: scheight * 0.5)
+            .background(Color.white.opacity(0.75))
+            .cornerRadius(20)
         }
     }
 }
+
+
