@@ -28,7 +28,7 @@ struct PlayingView: View {
                         .scaledToFill()
                         .ignoresSafeArea()
                     
-                    Text(isShining ? "今だ！！" : "集中…")
+                    Text(isShining ? "タップ!!" : "Ready?")
                         .font(.largeTitle)
                         .foregroundColor(.white)
                 }
@@ -46,25 +46,30 @@ struct PlayingView: View {
         reactionTime = nil
         isFail = false
         showResult = false
-
+        workFailSoundWork?.cancel()
+        
         let delay = Double.random(in: 5...7)
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            sp.soundThunder()
-            isShining = true
-            startTime = Date()
+        let work = DispatchWorkItem{
+                sp.soundThunder()
+                isShining = true
+                startTime = Date()
         }
+        workFailSoundWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay ,execute : work)
     }
 
     // タップ処理
     func handleTap() {
+        workFailSoundWork?.cancel()
         if isShining, let start = startTime {
             reactionTime = Date().timeIntervalSince(start)
             isFail = false
+            
         } else {
             reactionTime = nil
             isFail = true
             
-            sp.soundFail()
+                sp.soundFail()
         }
         withAnimation {
             showResult = true

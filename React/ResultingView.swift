@@ -18,7 +18,7 @@ struct ResultingView: View {
     var body: some View {
         VStack{
             if isFail {
-                Text("フライング！")
+                Text("押すの早すぎ！")
                 
             } else if let time = reactionTime {
                 Text(String(format: "%.7f秒", time))
