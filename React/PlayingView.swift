@@ -6,9 +6,9 @@ struct PlayingView: View {
     @State private var reactionTime: Double?    // 成功時の反応時間
     @State private var isFail = false           // フライング判定
     @State private var showResult = false       // 結果画面表示
-    @State private var workFailSoundItem : DispatchWorkItem? 
-   
-   let sp = SoundPlayer()
+    @State private var workFailSoundWork : DispatchWorkItem?
+    
+    let sp = SoundPlayer()
 
     var body: some View {
         ZStack {
@@ -23,12 +23,12 @@ struct PlayingView: View {
             } else {
                 // 通常のプレイ画面
                 ZStack {
-                   (isShining ? Image(.shining) : Image(.waiting))
+                    (isShining ? Image(.shining) : Image(.waiting))
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
                     
-                    Text(isShining ? "今だ！！" : "集中…")
+                    Text(isShining ? "タップ!!" : "Ready?")
                         .font(.largeTitle)
                         .foregroundColor(.white)
                 }
@@ -46,30 +46,30 @@ struct PlayingView: View {
         reactionTime = nil
         isFail = false
         showResult = false
+        workFailSoundWork?.cancel()
         
-
         let delay = Double.random(in: 5...7)
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-
-           sp.soundThunder()
-
-            sp.soundThunder()
-
-            isShining = true
-            startTime = Date()
+        let work = DispatchWorkItem{
+                sp.soundThunder()
+                isShining = true
+                startTime = Date()
         }
+        workFailSoundWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay ,execute : work)
     }
 
     // タップ処理
     func handleTap() {
+        workFailSoundWork?.cancel()
         if isShining, let start = startTime {
             reactionTime = Date().timeIntervalSince(start)
             isFail = false
+            
         } else {
             reactionTime = nil
             isFail = true
             
-            sp.soundFail()
+                sp.soundFail()
         }
         withAnimation {
             showResult = true
