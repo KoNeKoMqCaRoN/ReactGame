@@ -82,7 +82,7 @@ struct ContentView: View {
                   .fontWeight(.bold)
                   .foregroundStyle(.black)
             }
-            .frame(maxWidth: .infinity, maxHeight: 170)
+            .frame(maxWidth: .infinity, minHeight: 170)
             .background(Color.white.opacity(0.75))
             .cornerRadius(20)
          }
