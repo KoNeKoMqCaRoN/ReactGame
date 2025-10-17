@@ -11,28 +11,58 @@ import AVFoundation
 class SoundPlayer: NSObject {
    
    // 音源データ読み込み
-   let playBtn = NSDataAsset(name: "tapPlay")!.data
-   let rankingBtn = NSDataAsset(name: "tapRanking")!.data
+   let BtnPlay = NSDataAsset(name: "tapPlay")!.data
+   let BtnRanking = NSDataAsset(name: "tapRanking")!.data
+   let fail = NSDataAsset(name: "tapFail")!.data
+   let thunder = NSDataAsset(name: "dropThunder")!.data
+   let waitingThunder = NSDataAsset(name: "waitingThunder")!.data
    
    // 音源プレイヤーの変数
-   var playBtnPlayer: AVAudioPlayer!
-   var rankingBtnPlayer: AVAudioPlayer!
+   var BtnPlayPlayer: AVAudioPlayer!
+   var BtnRankingPlayer: AVAudioPlayer!
+   var failPlayer: AVAudioPlayer!
+   var thunderPlayer: AVAudioPlayer!
+   var waitingThunderPlayer: AVAudioPlayer!
    
-   func playTapSound() {
+   // 音源呼び出しメソッド
+   func soundTapPlay() {
       do {
-         playBtnPlayer = try AVAudioPlayer(data: playBtn)
-         playBtnPlayer.play()
+         BtnPlayPlayer = try AVAudioPlayer(data: BtnPlay)
+         BtnPlayPlayer.play()
       } catch {
          print("playボタン音でエラー")
       }
    }
-   
-   func rankingTapSound() {
+   func soundTapRanking() {
       do {
-         rankingBtnPlayer = try AVAudioPlayer(data: rankingBtn)
-         rankingBtnPlayer.play()
+         BtnRankingPlayer = try AVAudioPlayer(data: BtnRanking)
+         BtnRankingPlayer.play()
       } catch {
          print("rankingボタン音でエラー")
+      }
+   }
+   func soundFail() {
+      do {
+         failPlayer = try AVAudioPlayer(data: fail)
+         failPlayer.play()
+      } catch {
+         print("Fail音エラー")
+      }
+   }
+   func soundThunder() {
+      do {
+         thunderPlayer = try AVAudioPlayer(data: thunder)
+         thunderPlayer.play()
+      } catch {
+         print("Thunder音でエラー")
+      }
+   }
+   func soundWaitingThunder() {
+      do {
+         waitingThunderPlayer = try AVAudioPlayer(data: waitingThunder)
+         waitingThunderPlayer.play()
+      } catch {
+         print("WaitingThunder音でエラー")
       }
    }
    
