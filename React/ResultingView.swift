@@ -20,17 +20,21 @@ struct ResultingView: View {
             if isFail {
                 Text("押すの早すぎ！")
                 
+                
             } else if let time = reactionTime {
                 Text(String(format: "%.7f秒", time))
+                
+                Button{
+                    
+                    
+                    
+                } label: {
+                    Text("ランキングに載せる！")
+                }
+                
             }
             
-            Button{
-                
-                
-                
-            } label: {
-                Text("ランキングに載せる！")
-            }
+            
             
             Button{
                 onRetry()
